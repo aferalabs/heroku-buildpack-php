@@ -8,21 +8,20 @@ set -eu
 
 # Config
 GIT_SOURCE=git://github.com/phalcon/cphalcon.git
-PHALCON_DIR=cphalcon
-PHALCON_VERSION=phalcon-v2.0.3
+PHALCON_VERSION=cphalcon-phalcon-v2.0.3
+PHALCON_DIR=/tmp/${PHALCON_VERSION}
 
 # VCS checkout
 echo "Building Phalcon, be patient ..." | indent
-git clone $GIT_SOURCE -q
+
+curl --silent --location "https://github.com/phalcon/cphalcon/archive/${PHALCON_VERSION}.tar.gz" | tar xz -C /tmp
 
 if [ ! -d "$PHALCON_DIR" ]; then
   echo "[ERROR] Failed to find phalconphp directory $phalcon_dir" | indent
   exit
 fi
 
-cd $PHALCON_DIR
-git checkout $PHALCON_VERSION 2>&1 > /dev/null
-cd build
+cd $PHALCON_DIR/build
 
 # Build
 BUILD_DIR=$1
