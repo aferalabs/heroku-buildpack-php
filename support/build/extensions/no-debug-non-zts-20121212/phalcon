@@ -4,7 +4,7 @@
 # fail hard
 set -o pipefail
 # fail harder
-set -eux
+set -eu
 
 # Config
 GIT_SOURCE=git://github.com/phalcon/cphalcon.git
@@ -12,7 +12,7 @@ PHALCON_DIR=cphalcon
 PHALCON_VERSION=phalcon-v2.0.3
 
 # VCS checkout
-echo "Building Phalcon..." | indent
+echo "Building Phalcon, be patient ..." | indent
 git clone $GIT_SOURCE -q
 
 if [ ! -d "$PHALCON_DIR" ]; then
