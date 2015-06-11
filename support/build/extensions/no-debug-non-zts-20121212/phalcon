@@ -26,7 +26,7 @@ cd "${PHALCON_DIR}/build"
 
 # Build
 bash ./install #> /dev/null
-cp "${BP_DIR}/conf/php/conf.d/ext-phalcon.so" "${BUILD_DIR}/.heroku/php/etc/php/conf.d/phalcon.so"
+cp "${BP_DIR}/conf/php/conf.d/phalcon.ini" "${BUILD_DIR}/.heroku/php/etc/php/conf.d"
 
 # Go back to build dir do not break compile
 cd ${BUILD_DIR}
