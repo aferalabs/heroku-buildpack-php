@@ -29,5 +29,5 @@ ln -s $BUILD_DIR/.heroku /app/.heroku
 export PATH=/app/.heroku/php/bin:$PATH
 bash ./install > /dev/null
 
-# Go back home and do not break compile
-cd ~
+# Go back to build dir do not break compile
+cd ${BUILD_DIR}
