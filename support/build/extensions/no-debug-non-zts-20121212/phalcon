@@ -17,7 +17,7 @@ fi
 
 cd $PHALCON_DIR
 git checkout $PHALCON_VERSION
-cd $PHALCON_DIR/build
+cd build
 
 # Build
 BUILD_DIR=$1
