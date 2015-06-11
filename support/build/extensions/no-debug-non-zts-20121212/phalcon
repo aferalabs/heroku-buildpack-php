@@ -12,20 +12,20 @@ PHALCON_VERSION=phalcon-v${CUSTOM_PHALCON_VERSION:=2.0.3}
 PHALCON_DIR=/tmp/cphalcon-${PHALCON_VERSION}
 
 # VCS checkout
-echo "- Building Phalcon, be patient ..." | indent
+echo "- Building Phalcon (${PHALCON_VERSION}), be patient ..." | indent
 
 # TODO precompile and just download
 curl --silent --location "https://github.com/phalcon/cphalcon/archive/${PHALCON_VERSION}.tar.gz" | tar xz -C /tmp
 
 if [ ! -d "$PHALCON_DIR" ]; then
-  echo "- [ERROR] Failed to find phalconphp directory $PHALCON_DIR" | indent
-  exit
+  echo "- [ERROR] Failed to clone phalcon repository $PHALCON_DIR" | indent
+  exit 1
 fi
 
 cd "${PHALCON_DIR}/build"
 
 # Build
-bash ./install #> /dev/null
+bash ./install 2>&1 > /dev/null
 cp "${BP_DIR}/conf/php/conf.d/ext-phalcon.ini" "${BUILD_DIR}/.heroku/php/etc/php/conf.d"
 
 # Go back to build dir do not break compile
