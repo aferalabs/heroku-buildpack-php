@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Build Path: /app/.heroku/php/
+
+# Config
+GIT_SOURCE=git://github.com/phalcon/cphalcon.git
+PHALCON_DIR=cphalcon
+PHALCON_VERSION=phalcon-v2.0.3
+
+# VCS checkout
+echo "-----> Building Phalcon..."
+git clone --depth=1 $GIT_SOURCE -q
+
+if [ ! -d "$PHALCON_DIR" ]; then
+  echo "[ERROR] Failed to find phalconphp directory $phalcon_dir"
+  exit
+fi
+
+cd $PHALCON_DIR
+git checkout $PHALCON_VERSION
+cd $PHALCON_DIR/build
+
+# Build
+BUILD_DIR=$1
+ln -s $BUILD_DIR/.heroku /app/.heroku
+export PATH=/app/.heroku/php/bin:$PATH
+bash ./install
+cd
+echo "important extension phalcon into php.ini"
+echo "extension=phalcon.so" >> /app/.heroku/php/etc/php/php.ini
