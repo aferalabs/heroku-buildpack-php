@@ -28,5 +28,8 @@ cd "${PHALCON_DIR}/build"
 bash ./install 2>&1 > /dev/null
 cp "${BP_DIR}/conf/php/conf.d/ext-phalcon.ini" "${BUILD_DIR}/.heroku/php/etc/php/conf.d"
 
+# Clean up
+rm -fr ${PHALCON_DIR}
+
 # Go back to build dir do not break compile
 cd ${BUILD_DIR}
