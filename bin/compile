@@ -225,8 +225,6 @@ echo $NGINX_VERSION > $BUILD_DIR/.heroku/php/.versions/nginx/nginx
 if [[ "${PHP_VERSION}" ]]; then
     status "Installing PHP extensions..."
 
-    source $BP_DIR/support/build/extensions/no-debug-non-zts-20121212/phalcon
-
     php() {
         # the newrelic extension logs to stderr which pollutes our build output on each invocation of PHP, the daemon it launches will prevent the build from finishing, and each call to PHP would be logged to NR as non-web traffic, so we disable it for the duration of this build
         `which php` -dnewrelic.enabled=0 -dnewrelic.loglevel=error -dnewrelic.daemon.dont_launch=3 -dnewrelic.daemon.loglevel=error "$@"
@@ -241,7 +239,11 @@ if [[ "${PHP_VERSION}" ]]; then
         ext_source="composer.json"
     fi
     for ext in "${!exts[@]}"; do # loop over keys in case the array is empty or else it'll error out
-        install_ext "${exts[$ext]}" $ext_source
+        if [ "${exts[$ext]}" == "phalcon" ]; then
+            source $BP_DIR/support/build/extensions/no-debug-non-zts-20121212/phalcon
+        else
+            install_ext "${exts[$ext]}" $ext_source
+        fi
     done
     
     # special treatment for New Relic; we enable it if we detect a license key for it
