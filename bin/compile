@@ -30,7 +30,7 @@ install_ext () {
 # fail hard
 set -o pipefail
 # fail harder
-set -eux
+set -eu
 # move hidden files too, just in case
 shopt -s dotglob
 
