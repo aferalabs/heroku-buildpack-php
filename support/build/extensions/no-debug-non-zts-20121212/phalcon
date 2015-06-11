@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # Build Path: /app/.heroku/php/
 
+# fail hard
+set -o pipefail
+# fail harder
+set -eux
+
 # Config
 GIT_SOURCE=git://github.com/phalcon/cphalcon.git
 PHALCON_DIR=cphalcon
@@ -23,4 +28,4 @@ cd build
 BUILD_DIR=$1
 ln -s $BUILD_DIR/.heroku /app/.heroku
 export PATH=/app/.heroku/php/bin:$PATH
-bash ./install
+bash ./install > /dev/null
