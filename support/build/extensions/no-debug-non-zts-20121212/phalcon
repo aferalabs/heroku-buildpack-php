@@ -21,7 +21,7 @@ if [ ! -d "$PHALCON_DIR" ]; then
 fi
 
 cd $PHALCON_DIR
-git checkout $PHALCON_VERSION
+git checkout $PHALCON_VERSION 2>&1 > /dev/null
 cd build
 
 # Build
