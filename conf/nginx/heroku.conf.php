@@ -26,8 +26,12 @@ http {
     }
     
     server {
+        location @rewrite {
+            rewrite ^/(.*)$ /index.php?_url=/$1;
+        }
+
         # define an easy to reference name that can be used in try_files
-        location @heroku-fcgi {
+        location ~ \.php {
             include fastcgi_params;
             
             fastcgi_split_path_info ^(.+\.php)(/.*)$;
@@ -62,9 +66,6 @@ http {
             deny all;
         }
         
-        # default handling of .php
-        location ~ \.php {
-            try_files @heroku-fcgi @heroku-fcgi;
-        }
+        try_files $uri $uri/ @rewrite;
     }
 }
