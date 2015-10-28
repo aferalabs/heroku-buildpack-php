@@ -8,7 +8,7 @@ set -eu
 
 # Config
 GIT_SOURCE=git://github.com/phalcon/cphalcon.git
-PHALCON_VERSION=phalcon-v${CUSTOM_PHALCON_VERSION:=2.0.3}
+PHALCON_VERSION=phalcon-v${CUSTOM_PHALCON_VERSION:=2.0.8}
 PHALCON_DIR=/tmp/cphalcon-${PHALCON_VERSION}
 
 # VCS checkout

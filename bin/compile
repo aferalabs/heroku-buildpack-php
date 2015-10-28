@@ -264,6 +264,7 @@ if [[ "${PHP_VERSION}" ]]; then
         ext_source="$COMPOSER"
     fi
     for ext in "${!exts[@]}"; do # loop over keys in case the array is empty or else it'll error out
+        echo ${exts[$ext]}
         if [ "${exts[$ext]}" == "phalcon" ]; then
             source $BP_DIR/support/build/extensions/no-debug-non-zts-20121212/phalcon
         else
